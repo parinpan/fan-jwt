@@ -1,6 +1,7 @@
 <?php
 
-require_once('Base64Url.php');
+namespace libs\JWTGenerator;
+use libs\Base64Url;
 
 /*
     Written by: M. Fachrin Aulia Nasution

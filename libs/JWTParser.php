@@ -1,8 +1,10 @@
 <?php
 
-require_once('Base64Url.php');
-require_once('JWTErrors.php');
-require_once('JWTGenerator.php');
+namespace libs\JWTParser;
+
+use libs\Base64Url;
+use libs\JWTErrors;
+use libs\JWTGenerator;
 
 /*
     Written by: M. Fachrin Aulia Nasution
@@ -55,16 +57,3 @@ class JWTParser
         }
     }
 }
-
-$token = (new JWTGenerator())
- ->setKey('391972E79C30BB5C2A8941E34129332C001E99E0D5AE90662EF7737352AD9651')
- ->setHeaders([
-     'alg' => 'HS256',
-     'typ' => 'JWT'
- ])
- ->setPayload([
-     'name' => 'hahahahah'
- ])
- ->getToken();
-
- var_dump($token, JWTParser::parseToken($token));

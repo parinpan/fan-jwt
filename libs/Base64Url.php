@@ -1,5 +1,7 @@
 <?php
 
+namespace libs\Base64Url;
+
 final class Base64Url
 {
     public static function encode($string)

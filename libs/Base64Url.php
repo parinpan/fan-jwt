@@ -1,6 +1,6 @@
 <?php
 
-namespace libs\Base64Url;
+namespace parinpan\fanjwt\libs\Base64Url;
 
 final class Base64Url
 {

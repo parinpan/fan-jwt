@@ -1,7 +1,7 @@
 <?php
 
-namespace libs\JWTGenerator;
-use libs\Base64Url;
+namespace parinpan\fanjwt\libs\JWTGenerator;
+use parinpan\fanjwt\libs\Base64Url;
 
 /*
     Written by: M. Fachrin Aulia Nasution

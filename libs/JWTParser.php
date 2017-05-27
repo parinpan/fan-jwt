@@ -1,10 +1,10 @@
 <?php
 
-namespace libs\JWTParser;
+namespace parinpan\fanjwt\libs\JWTParser;
 
-use libs\Base64Url;
-use libs\JWTErrors;
-use libs\JWTGenerator;
+use parinpan\fanjwt\libs\Base64Url;
+use parinpan\fanjwt\libs\JWTErrors;
+use parinpan\fanjwt\libs\JWTGenerator;
 
 /*
     Written by: M. Fachrin Aulia Nasution

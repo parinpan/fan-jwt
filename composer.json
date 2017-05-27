@@ -11,7 +11,10 @@
         }
     ],
     "autoload": {
-        "psr-4": {"parinpan\\fanjwt\\": ""}
+        "psr-4": {
+            "parinpan\\fanjwt\\": "",
+            "parinpan\\fanjwt\\libs\\": "libs/"
+        }
     },
     "repositories": [
         {

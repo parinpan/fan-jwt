@@ -1,0 +1,21 @@
+{
+    "name": "parinpan/fan-jwt",
+    "description": "A really lightweight JWT library for private use",
+    "type": "library",
+    "version": "1.0",
+    "authors": [
+        {
+            "name": "M. Fachrin Aulia Nasution",
+            "email": "prn@samper.in"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"parinpan\\fanjwt\\": ""}
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:parinpan/fan-jwt.git"
+        }
+    ]
+}

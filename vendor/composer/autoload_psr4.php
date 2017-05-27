@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'parinpan\\fanjwt\\libs\\' => array($baseDir . '/libs'),
     'parinpan\\fanjwt\\' => array($baseDir . '/'),
 );

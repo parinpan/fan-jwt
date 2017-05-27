@@ -1,6 +1,6 @@
 <?php
 
-namespace parinpan\fanjwt\libs\JWTGenerator;
+namespace parinpan\fanjwt\libs;
 use parinpan\fanjwt\libs\Base64Url;
 
 /*

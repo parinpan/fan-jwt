@@ -1,6 +1,6 @@
 <?php
 
-namespace parinpan\fanjwt\libs\JWTParser;
+namespace parinpan\fanjwt\libs;
 
 use parinpan\fanjwt\libs\Base64Url;
 use parinpan\fanjwt\libs\JWTErrors;

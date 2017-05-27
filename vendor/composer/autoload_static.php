@@ -9,11 +9,16 @@ class ComposerStaticInitdd18ce504ec76a965e8f1b08619da20f
     public static $prefixLengthsPsr4 = array (
         'p' => 
         array (
+            'parinpan\\fanjwt\\libs\\' => 21,
             'parinpan\\fanjwt\\' => 16,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'parinpan\\fanjwt\\libs\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/libs',
+        ),
         'parinpan\\fanjwt\\' => 
         array (
             0 => __DIR__ . '/../..' . '/',

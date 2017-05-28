@@ -3,6 +3,7 @@
 namespace parinpan\fanjwt\libs;
 
 use parinpan\fanjwt\libs\Base64Url;
+use parinpan\fanjwt\libs\JWTConfig;
 use parinpan\fanjwt\libs\JWTErrors;
 use parinpan\fanjwt\libs\JWTGenerator;
 
@@ -31,8 +32,7 @@ class JWTParser
 
             if($headersDecoded && $payloadDecoded)
             {
-                $jwtConfig = require_once('../config/jwt.php');
-                $secretKey = $jwtConfig['secret_key'];
+                $secretKey = JWTConfig::SECRET_TOKEN;
                 $data = "{$headers}.{$payload}";
 
                 $clientSignature = Base64Url::encode(

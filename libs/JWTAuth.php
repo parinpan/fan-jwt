@@ -48,7 +48,11 @@ class JWTAuth
 
 		$jwtToken = $props['ssotok'];
 		$credentials = @JWTParser::parseToken($jwtToken);
-		$credentials['jwt_token'] = $jwtToken;
+
+		if($credentials)
+		{
+			$credentials['jwt_token'] = $jwtToken;
+		}
 
 		setcookie(
 			'ssotok', $jwtToken,

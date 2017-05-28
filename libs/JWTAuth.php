@@ -32,7 +32,7 @@ class JWTAuth
 				$jwt->payload->exp, '/', false,
 				$props['secured'], true
 			);
-		}x
+		}
 
 		$redirUrl = $jwt ? @$props['redir'] : @$props['serverLogin'] . "?failed=1";
 		header('Content-Type: text/html');

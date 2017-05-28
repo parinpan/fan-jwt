@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io/api/git,composer,sublimetext
 
+.git/
+
 ### Composer ###
 composer.phar
 /vendor/

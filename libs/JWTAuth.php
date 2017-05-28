@@ -2,6 +2,7 @@
 
 namespace parinpan\fanjwt\libs;
 
+use parinpan\fanjwt\libs\Base64Url;
 use parinpan\fanjwt\libs\JWTConfig;
 use parinpan\fanjwt\libs\JWTParser;
 
@@ -9,7 +10,15 @@ class JWTAuth
 {
 	public static function send(Array $props)
 	{
+		
+	}
 
+	public static function makeLink(Array $props)
+	{
+		return $props['baseUrl'] . "?" . http_build_query([
+			'redir' => Base64Url::encode($props['redir']),
+			'callback' => Base64Url::encode($props['callback'])
+		]);
 	}
 
 	public static function recv(Array $props)

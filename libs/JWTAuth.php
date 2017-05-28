@@ -26,14 +26,14 @@ class JWTAuth
 		curl_setopt($curl, CURLOPT_URL, $props['callback']);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query([
 			'redir' => $props['redir'],
-			'token' => $props['token']
+			'ssotok' => $props['ssotok']
 		]));
 
 		$response = @json_decode(
 			curl_exec($curl)
 		);
 
-		return @$response['jwt_token'] === $props['token'] ? $response : false;
+		return @$response['ssotok'] === $props['ssotok'] ? $response : false;
 	}
 
 	public static function recv(Array $props)
@@ -51,7 +51,8 @@ class JWTAuth
 
 		if($credentials)
 		{
-			$credentials['jwt_token'] = $jwtToken;
+			$credentials['ssotok'] = $jwtToken;
+			$credentials['redir'] = $props['redir'];
 		}
 
 		setcookie(

@@ -4,7 +4,6 @@ namespace parinpan\fanjwt\libs;
 
 use parinpan\fanjwt\libs\Base64Url;
 use parinpan\fanjwt\libs\JWTConfig;
-use parinpan\fanjwt\libs\JWTErrors;
 use parinpan\fanjwt\libs\JWTGenerator;
 
 /*

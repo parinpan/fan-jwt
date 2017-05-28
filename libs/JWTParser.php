@@ -44,15 +44,10 @@ class JWTParser
                 $isValidToken = $clientSignature === $signature;
             }
 
-            if(!$isValidToken)
-            {
-                throw new \Exception('Token is not match and invalid.');
-            }
-
-            return (object) [
+            return $isValidToken ? (object) [
                 'headers' => $headersDecoded,
                 'payload' => $payloadDecoded
-            ];
+            ] : false;
         }
     }
 }

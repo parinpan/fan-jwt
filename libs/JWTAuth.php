@@ -8,11 +8,6 @@ use parinpan\fanjwt\libs\JWTParser;
 
 class JWTAuth
 {
-	public static function send(Array $props)
-	{
-		
-	}
-
 	public static function makeLink(Array $props)
 	{
 		return $props['baseUrl'] . "?" . http_build_query([
@@ -21,8 +16,30 @@ class JWTAuth
 		]);
 	}
 
+	public static function send(Array $props)
+	{
+		$curl = curl_init();
+		header('Content-Type: application/json');
+
+		curl_setopt($curl, CURLOPT_POST, 1);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_URL, $props['callback']);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query([
+			'redir' => $props['redir'],
+			'token' => $props['token']
+		]));
+
+		$response = @json_decode(
+			curl_exec($curl)
+		);
+
+		return $response['jwt_token'] === $props['token'] ? $response : false;
+	}
+
 	public static function recv(Array $props)
 	{
+		header('Content-Type: application/json');
+
 		$props = [
 			'ssotok' => @$props['ssotok'] ?: null,
 			'secured' => @$props['secured'] ?: false,
@@ -31,6 +48,7 @@ class JWTAuth
 
 		$jwtToken = $props['ssotok'];
 		$credentials = @JWTParser::parseToken($jwtToken);
+		$credentials['jwt_token'] = $jwtToken;
 
 		setcookie(
 			'ssotok', $jwtToken,
@@ -38,6 +56,6 @@ class JWTAuth
 			null, $props['secured'], true
 		);
 
-		return header("Location: {$props['redir']}");
+		return json_encode($credentials);
 	}
 }

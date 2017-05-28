@@ -56,6 +56,6 @@ class JWTAuth
 			null, $props['secured'], true
 		);
 
-		return json_encode($credentials);
+		return json_encode($credentials) ?: false;
 	}
 }

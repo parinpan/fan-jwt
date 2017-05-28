@@ -33,8 +33,9 @@ class JWTAuth
 			);
 		}
 
+		$redirUrl = $jwt ? @$props['redir'] : @$_SERVER['HTTP_REFERER'];
 		header('Content-Type: text/html');
-		header('Refresh: 3; URL=' . ($jwt ? $props['redir'] : $_SERVER['HTTP_REFERER']));
+		header('Refresh: 3; URL=' . $redirUrl;
 
 		return "Please wait, while we are signing you in....";
 	}

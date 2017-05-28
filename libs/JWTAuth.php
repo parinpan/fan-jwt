@@ -33,7 +33,7 @@ class JWTAuth
 			curl_exec($curl)
 		);
 
-		return $response['jwt_token'] === $props['token'] ? $response : false;
+		return @$response['jwt_token'] === $props['token'] ? $response : false;
 	}
 
 	public static function recv(Array $props)

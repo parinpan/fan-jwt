@@ -47,7 +47,7 @@ class JWTParser
 
             if(!$isValidToken)
             {
-                throw new \JWTInvalidToken('Token is not match and invalid.');
+                throw new \Exception('Token is not match and invalid.');
             }
 
             return (object) [

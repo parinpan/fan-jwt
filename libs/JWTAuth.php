@@ -16,51 +16,26 @@ class JWTAuth
 		]);
 	}
 
-	public static function send(Array $props)
-	{
-		$curl = curl_init();
-		header('Content-Type: application/json');
-
-		curl_setopt($curl, CURLOPT_POST, 1);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_URL, $props['callback']);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query([
-			'redir' => $props['redir'],
-			'ssotok' => $props['ssotok']
-		]));
-
-		$response = @json_decode(
-			curl_exec($curl)
-		);
-
-		return @$response['ssotok'] === $props['ssotok'] ? $response : false;
-	}
-
 	public static function recv(Array $props)
 	{
-		header('Content-Type: application/json');
-
 		$props = [
-			'ssotok' => @$props['ssotok'] ?: null,
-			'secured' => @$props['secured'] ?: false,
-			'redir' => @$props['redir'] ?: '/'
+			'redir' => @$props['redir'] ?: '/',
+			'ssotok' => @$props['ssotok'] ?: false,
+			'secured' => @$props['secured'] ?: false
 		];
 
-		$jwtToken = $props['ssotok'];
-		$credentials = @JWTParser::parseToken($jwtToken);
-
-		if($credentials)
+		if($jwt = @JWTParser::parseToken($props['ssotok']))
 		{
-			$credentials['ssotok'] = $jwtToken;
-			$credentials['redir'] = $props['redir'];
+			setcookie(
+				'ssotok', $props['ssotok'],
+				$jwt->payload->exp, '/', false,
+				$props['secured'], true
+			);
 		}
 
-		setcookie(
-			'ssotok', $jwtToken,
-			$credentials->payload->exp, '/',
-			null, $props['secured'], true
-		);
+		header('Content-Type: text/html');
+		header('Refresh: 3; URL=' . ($jwt ? $props['redir'] : $_SERVER['HTTP_REFERER']));
 
-		return $credentials ? json_encode($credentials) : false;
+		return "Please wait, while we are signing you in....";
 	}
 }

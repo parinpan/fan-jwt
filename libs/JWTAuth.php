@@ -16,7 +16,7 @@ class JWTAuth
 		]);
 	}
 
-	public static function communicate($server, $token)
+	public static function communicate($server, $token, \Closure $actionFunc = null)
 	{
 		$curl = curl_init();
 
@@ -26,7 +26,10 @@ class JWTAuth
 			"Authorization: Bearer {$token}"
 		]);
 
-		return @json_decode(curl_exec($curl));
+		$response = @json_decode(curl_exec($curl));
+		$callAction = $actionFunc ? call_user_func($actionFunc, $response) : false;
+
+		return $callAction ?: false;
 	}
 
 	public static function listen()

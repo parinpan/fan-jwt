@@ -29,7 +29,7 @@ class JWTAuth
 		$response = @json_decode(curl_exec($curl));
 		$callAction = $actionFunc ? call_user_func($actionFunc, $response) : false;
 
-		return $callAction ?: false;
+		return $callAction ?: $response;
 	}
 
 	public static function listen()

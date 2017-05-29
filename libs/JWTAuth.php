@@ -16,13 +16,36 @@ class JWTAuth
 		]);
 	}
 
+	public static function communicate($server, $token)
+	{
+		$curl = curl_init();
+
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_URL, $server);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, [
+			"Authorization: Bearer {$token}"
+		]);
+
+		return @json_decode(curl_exec($curl));
+	}
+
+	public static function listen()
+	{
+		$precedenceAuthStr = 'Authorization: Bearer ';
+		$authorizationStr = @getallheaders()['Authorization'];
+
+		$jwtToken = str_replace($precedenceAuthStr, '', $authorizationStr);
+		$parsedToken = @JWTParser::parseToken($token);
+		$parsedToken['token'] = $jwtToken;
+
+		return $parsedToken;
+	}
+
 	public static function recv(Array $props)
 	{
 		$props = [
-			'redir' => @$props['redir'] ?: '/',
 			'ssotok' => @$props['ssotok'] ?: false,
 			'secured' => @$props['secured'] ?: false,
-			'serverLogin' => @$props['serverLogin'] ?: '/',
 		];
 
 		if($jwt = @JWTParser::parseToken($props['ssotok']))
@@ -34,10 +57,6 @@ class JWTAuth
 			);
 		}
 
-		$redirUrl = $jwt ? @$props['redir'] : @$props['serverLogin'] . "?failed=1";
-		header('Content-Type: text/html');
-		header('Location: ' . $redirUrl);
-
-		return "Please wait, while we are signing you in....";
+		return true;
 	}
 }

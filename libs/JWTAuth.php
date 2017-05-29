@@ -31,12 +31,12 @@ class JWTAuth
 
 	public static function listen()
 	{
-		$precedenceAuthStr = 'Authorization: Bearer ';
+		$precedenceAuthStr = 'Bearer ';
 		$authorizationStr = @getallheaders()['Authorization'];
+		$jwtToken = $authorizationStr ? @explode(' ', $authorizationStr)[1] : null;
 
-		$jwtToken = str_replace($precedenceAuthStr, '', $authorizationStr);
-		$parsedToken = @JWTParser::parseToken($token);
-		$parsedToken['token'] = $jwtToken;
+		$parsedToken = @JWTParser::parseToken($jwtToken);
+		$parsedToken->token = $jwtToken;
 
 		return $parsedToken;
 	}

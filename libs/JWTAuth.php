@@ -26,8 +26,12 @@ class JWTAuth
 			"Authorization: Bearer {$token}"
 		]);
 
-		$response = @json_decode(curl_exec($curl));
+		$parsedToken = @json_decode(curl_exec($curl));
+		$response = $parsedToken ?: new \stdClass();
 		$callAction = $actionFunc ? call_user_func($actionFunc, $response) : false;
+
+		$response->token = $token;
+		$response->logged_in = @$response->logged_in ?: ((bool) $parsedToken);
 
 		return $callAction ?: $response;
 	}

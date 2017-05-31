@@ -53,8 +53,10 @@ class JWTAuth
 		$authorizationStr = @getallheaders()['Authorization'];
 		$jwtToken = $authorizationStr ? @explode(' ', $authorizationStr)[1] : null;
 
-		$parsedToken = @JWTParser::parseToken($jwtToken);
-		$parsedToken->token = $jwtToken;
+		if($parsedToken = @JWTParser::parseToken($jwtToken))
+		{
+			$parsedToken->token = $jwtToken;
+		}
 
 		return $parsedToken;
 	}

@@ -10,10 +10,17 @@ class JWTAuth
 {
 	public static function makeLink(Array $props)
 	{
-		return $props['baseUrl'] . "?" . http_build_query([
+		$query = [
 			'redir' => Base64Url::encode($props['redir']),
 			'callback' => Base64Url::encode($props['callback'])
-		]);
+		];
+
+		if(isset($props['type']) && $props['type'] == 'logout')
+		{
+			unset($query['callback']);
+		}
+
+		return $props['baseUrl'] . "?" . http_build_query($query);
 	}
 
 	public static function communicate($server, $token, \Closure $actionFunc = null)

@@ -41,10 +41,7 @@ class JWTAuth
 			$response->connected = false;
 		}
 
-		$callAction = $actionFunc ?
-			call_user_func($actionFunc, $response) : false;
-
-		return $callAction ?: $response;
+		return $actionFunc ? call_user_func($actionFunc, $response) : $response;
 	}
 
 	public static function listen()

@@ -13,7 +13,7 @@ class JWTGenerator
 {
     private $key;
     private $headers;
-	private $payload;
+    private $payload;
     private $signature;
 
     const ORIGINAL_ATTR = 1;

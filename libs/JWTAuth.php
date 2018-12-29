@@ -61,6 +61,7 @@ class JWTAuth
 	public static function recv(Array $props)
 	{
 		$props = [
+			'domain' => @$props['domain'] ?: false,
 			'ssotok' => @$props['ssotok'] ?: false,
 			'secured' => @$props['secured'] ?: false,
 		];
@@ -70,8 +71,7 @@ class JWTAuth
 			setcookie(
 				'ssotok', $props['ssotok'],
 				$jwt->payload->exp, '/',
-				@$props['domain'] ?: false,
-				$props['secured'], true
+				$props['domain'], $props['secured'], true
 			);
 		}
 

@@ -71,7 +71,7 @@ class JWTAuth
 			setcookie(
 				'ssotok', $props['ssotok'],
 				$jwt->payload->exp, '/',
-				$props['domain'], $props['secured'], true
+				$props['domain'], $props['secured'], false
 			);
 		}
 

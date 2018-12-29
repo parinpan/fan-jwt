@@ -61,18 +61,21 @@ class JWTAuth
 	public static function recv(Array $props)
 	{
 		$props = [
-			'domain' => @$props['domain'] ?: false,
+			'domains' => @$props['domains'] ?: [],
 			'ssotok' => @$props['ssotok'] ?: false,
 			'secured' => @$props['secured'] ?: false,
 		];
 
 		if($jwt = @JWTParser::parseToken($props['ssotok']))
 		{
-			setcookie(
-				'ssotok', $props['ssotok'],
-				$jwt->payload->exp, '/',
-				$props['domain'], $props['secured'], false
-			);
+			foreach($props['domains'] as $domain)
+			{
+				setcookie(
+					'ssotok', $props['ssotok'],
+					$jwt->payload->exp, '/',
+					$domain, $props['secured'], false
+				);
+			}
 		}
 
 		return true;

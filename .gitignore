@@ -1,5 +1,5 @@
 # Created by https://www.gitignore.io/api/git,composer,sublimetext
-lib/JWTConfig.php
+libs/JWTConfig.php
 .git/
 
 ### Composer ###
